@@ -76,6 +76,56 @@ export class RegionData {
       id: 15,
       city: 'Kochi',
       state: 'Kerala'
+    },
+    {
+      id: 16,
+      city: 'Mysuru',
+      state: 'Karnataka'
+    },
+    {
+      id: 17,
+      city: 'Ludhiana',
+      state: 'Punjab'
+    },
+    {
+      id: 18,
+      city: 'Kozhikode',
+      state: 'Kerala'
+    },
+    {
+      id: 19,
+      city: 'Raipur',
+      state: 'Chhattisgarh'
+    },
+    {
+      id: 20,
+      city: 'Shimla',
+      state: 'Himachal Pradesh'
+    },
+    {
+      id: 21,
+      city: 'Lucknow',
+      state: 'Uttar Pradesh'
+    },
+    {
+      id: 22,
+      city: 'Indore',
+      state: 'Madhya Pradesh'
+    },
+    {
+      id: 23,
+      city: 'Nagpur',
+      state: 'Maharashtra'
+    },
+    {
+      id: 24,
+      city: 'Jodhpur',
+      state: 'Rajasthan'
+    },
+    {
+      id: 25,
+      city: 'Jamshedpur',
+      state: 'Jharkhand'
     }
   ];
 }
