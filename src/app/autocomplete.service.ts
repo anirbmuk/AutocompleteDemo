@@ -1,9 +1,10 @@
-import { Region } from './region.interface';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { BehaviorSubject, of } from 'rxjs';
-import { switchMap, map, tap } from 'rxjs/operators';
+import { switchMap, map, tap, debounceTime } from 'rxjs/operators';
+
+import { Region } from './region.interface';
 
 @Injectable({ providedIn: 'root' })
 export class AutocompleteService {
@@ -18,6 +19,8 @@ export class AutocompleteService {
   public autocomplete$ = this.action$.pipe(
     // Taps the emitted value from action stream
     tap(data => console.log('input:', data)),
+    // wait for 250 ms to allow the user to finish typing
+    debounceTime(250),
     // switchMap fires REST based on above input
     switchMap(input => ((!!input && input.trim().length > 1) ? this.http.get<Region[]>(`${this.regionsUrl}\?city=^${input}`) : of([])).pipe(
       // Additional sorting on switchMap output

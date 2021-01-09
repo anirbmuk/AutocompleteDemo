@@ -22,7 +22,7 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    InMemoryWebApiModule.forRoot(AppData, { delay: 500 }),
+    InMemoryWebApiModule.forRoot(AppData, { delay: 250 }),
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule
