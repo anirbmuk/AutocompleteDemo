@@ -18,15 +18,16 @@ export class AutocompleteService {
 
   public autocomplete$ = this.action$.pipe(
     // Taps the emitted value from action stream
-    tap(data => console.log('input:', data)),
-    // wait for 250 ms to allow the user to finish typing
+    tap((data: string) => console.log('input:', data)),
+    // Wait for 250 ms to allow the user to finish typing
     debounceTime(250),
     // switchMap fires REST based on above input
-    switchMap(input => ((!!input && input.trim().length > 1) ? this.http.get<Region[]>(`${this.regionsUrl}\?city=^${input}`) : of([])).pipe(
+    switchMap(input => ((!!input && input.trim().length > 1) ? this.http.get<Region[]>(`${this.regionsUrl}\?city=^${input}`) : of([]))
+    .pipe(
       // Additional sorting on switchMap output
       map((regions: Region[]) => regions.sort((region1, region2) => region1.city.localeCompare(region2.city))),
       // Taps the final emitted value from inner observable
-      tap(data => console.log('output:', data))
+      tap((data: Region[]) => console.log('output:', data))
     )),
   );
 
