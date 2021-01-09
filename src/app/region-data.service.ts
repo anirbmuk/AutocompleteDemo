@@ -1,5 +1,8 @@
+import { Injectable } from '@angular/core';
+
 import { Region } from './region.interface';
 
+@Injectable()
 export class RegionData {
   static regions: Region[] = [
     {
