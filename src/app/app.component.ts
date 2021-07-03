@@ -1,7 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 import { AutocompleteService } from './autocomplete.service';
+import { Region } from './region.interface';
 
 @Component({
   selector: 'app-root',
@@ -13,9 +15,9 @@ export class AppComponent implements OnInit {
 
   autocompleteForm: FormGroup;
 
-  constructor(private autocompleteService: AutocompleteService) {}
+  constructor(private readonly autocompleteService: AutocompleteService) {}
 
-  public regions$ = this.autocompleteService.autocomplete$;
+  readonly regions$: Observable<Region[]> = this.autocompleteService.autocomplete$;
 
   ngOnInit(): void {
     this.autocompleteForm = new FormGroup({
@@ -23,7 +25,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  onInput(event: KeyboardEvent): void {
-    this.autocompleteService.setAction((event.target as HTMLInputElement).value);
+  onInput(event: Event): void {
+    this.autocompleteService.setAction((event?.target as HTMLInputElement)?.value);
   }
 }
