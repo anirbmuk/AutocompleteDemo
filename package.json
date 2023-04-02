@@ -1,7 +1,7 @@
 {
   "name": "autocomplete-demo",
-  "version": "2.0.0",
-  "description": "Angular 10 application to demonstrate autocomplete feature with RxJS",
+  "version": "2.1.0",
+  "description": "Angular 13 application to demonstrate autocomplete feature with RxJS",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/anirbmuk/autocomplete-demo.git"
@@ -16,7 +16,11 @@
     "rxjs",
     "autocomplete"
   ],
-  "author": "anirbmuk",
+  "author": {
+    "name": "anirbmuk",
+    "email": "anirbmuk@live.in"
+  },
+  "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
