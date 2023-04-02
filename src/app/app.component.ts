@@ -2,6 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 import { AutocompleteService } from './autocomplete.service';
+import { Region } from './region.interface';
 
 @Component({
   selector: 'app-root',
@@ -21,5 +22,9 @@ export class AppComponent {
 
   onInput(event: Event): void {
     this.autocompleteService.setAction((event?.target as HTMLInputElement)?.value);
+  }
+
+  trackByFn(_: number, region: Region) {
+    return region.id;
   }
 }

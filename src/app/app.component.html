@@ -8,7 +8,7 @@
           <input type="text" placeholder="City" aria-label="Indian City" matInput formControlName="autocomplete"
             [matAutocomplete]="auto" (input)="onInput($event)">
           <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-            <mat-option *ngFor="let region of regions$ | async" [value]="region.capital">
+            <mat-option *ngFor="let region of regions$ | async; trackBy: trackByFn" [value]="region.capital">
               {{ region.capital + ' - ' + region.state }}
             </mat-option>
           </mat-autocomplete>
