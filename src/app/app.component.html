@@ -1,20 +1,18 @@
-<div class="container-fluid">
-  <div class="layout center-text">
-    <h1>Auto-complete with Angular material and RxJS</h1>
-    <hr>
-    <div class="content">
-      <form [formGroup]="autocompleteForm">
-        <mat-form-field style="width: 300px;">
-          <input type="text" placeholder="City" aria-label="Indian City" matInput formControlName="autocomplete"
-            [matAutocomplete]="auto" (input)="onInput($event)">
-          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-            <mat-option *ngFor="let region of regions$ | async; trackBy: trackByFn" [value]="region.capital">
-              {{ region.capital + ' - ' + region.state }}
-            </mat-option>
-          </mat-autocomplete>
-          <mat-hint>Enter at least 2 characters</mat-hint>
-        </mat-form-field>
-      </form>
-    </div>
+<div class="layout center-text">
+  <h1>Auto-complete with Angular material and RxJS</h1>
+  <hr>
+  <div class="content">
+    <form [formGroup]="autocompleteForm">
+      <mat-form-field style="width: 320px;">
+        <input type="text" placeholder="City" aria-label="Indian City" matInput formControlName="autocomplete"
+          [matAutocomplete]="auto" (input)="onInput($event)">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let region of regions$ | async; trackBy: trackByFn" [value]="region.capital">
+            {{ region.capital + ' - ' + region.state }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-hint>Enter at least 2 characters</mat-hint>
+      </mat-form-field>
+    </form>
   </div>
 </div>
