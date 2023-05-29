@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl } from '@angular/forms';
 
 import { ProductService } from './product.service';
 import { Product } from './product.interface';
@@ -12,8 +12,8 @@ import { Product } from './product.interface';
 })
 export class AppComponent {
 
-  readonly autocompleteForm = new FormGroup({
-    autocomplete: new FormControl('')
+  readonly autocompleteForm = new UntypedFormGroup({
+    autocomplete: new UntypedFormControl('')
   });
 
   constructor(private readonly productService: ProductService) { }
