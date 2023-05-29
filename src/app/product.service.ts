@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Subject, of } from 'rxjs';
@@ -9,7 +9,7 @@ import { Product } from './product.interface';
 @Injectable({ providedIn: 'root' })
 export class ProductService {
 
-  constructor(private readonly http: HttpClient) { }
+  private readonly http = inject(HttpClient);
 
   private productsUrl = 'https://dummyjson.com/products';
 
@@ -21,12 +21,12 @@ export class ProductService {
   }
 
   readonly products$ = this.action$.pipe(
-    // Taps the emitted value from action stream
-    tap(data => console.log('input:', data)),
     // Wait for 250 ms to allow the user to finish typing
     debounceTime(250),
     // Check if the input has changed from the last emitted value
     distinctUntilChanged(),
+    // Taps the debounced emitted value from action stream
+    tap(data => console.log('input:', data)),
     // switchMap fires REST based on above input
     switchMap(input => ((input?.trim()?.length > 1) ? this.http.get<{ products: Product[] }>(`${this.productsUrl}/search?q=${input.toLowerCase()}`) : of({ products: [] }))
       .pipe(

@@ -3,11 +3,11 @@
   <hr>
   <div class="content">
     <form [formGroup]="autocompleteForm">
-      <mat-form-field style="width: 320px;">
+      <mat-form-field style="width: 320px;" appearance="fill">
         <input type="text" placeholder="Search products..." aria-label="Search products" matInput
           formControlName="autocomplete" [matAutocomplete]="auto" (input)="onInput($event)">
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-          <mat-option *ngFor="let product of products$ | async; trackBy: trackByFn" [value]="product.id">
+          <mat-option *ngFor="let product of products$ | async; trackBy: trackByFn" [value]="product.title">
             {{ product.brand + ' ' + product.title }}
           </mat-option>
         </mat-autocomplete>
