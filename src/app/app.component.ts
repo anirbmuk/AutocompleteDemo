@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -22,13 +22,13 @@ const MATERIAL_MODULES = [MatFormFieldModule, MatInputModule, MatAutocompleteMod
 })
 export class AppComponent {
 
+  private readonly productService = inject(ProductService);
+
+  readonly products$ = this.productService.products$;
+
   readonly autocompleteForm = new FormGroup<{ autocomplete: FormControl<string | null | undefined> }>({
     autocomplete: new FormControl('')
   });
-
-  constructor(private readonly productService: ProductService) { }
-
-  readonly products$ = this.productService.products$;
 
   onInput(event: Event): void {
     this.productService.setAction((event?.target as HTMLInputElement)?.value);
