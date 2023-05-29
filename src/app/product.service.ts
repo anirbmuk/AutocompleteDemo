@@ -4,14 +4,14 @@ import { HttpClient } from '@angular/common/http';
 import { Subject, of } from 'rxjs';
 import { switchMap, map, tap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
-import { Region } from './region.interface';
+import { Product } from './product.interface';
 
 @Injectable({ providedIn: 'root' })
-export class AutocompleteService {
+export class ProductService {
 
   constructor(private readonly http: HttpClient) { }
 
-  private regionsUrl = 'api/regions';
+  private productsUrl = 'https://dummyjson.com/products';
 
   private actionSubject = new Subject<string | undefined | null>();
   readonly action$ = this.actionSubject.asObservable();
@@ -20,7 +20,7 @@ export class AutocompleteService {
     this.actionSubject.next(input);
   }
 
-  readonly autocomplete$ = this.action$.pipe(
+  readonly products$ = this.action$.pipe(
     // Taps the emitted value from action stream
     tap(data => console.log('input:', data)),
     // Wait for 250 ms to allow the user to finish typing
@@ -28,12 +28,12 @@ export class AutocompleteService {
     // Check if the input has changed from the last emitted value
     distinctUntilChanged(),
     // switchMap fires REST based on above input
-    switchMap(input => ((input?.trim()?.length > 1) ? this.http.get<Region[]>(`${this.regionsUrl}\?capital=^${input}`) : of([] as Region[]))
+    switchMap(input => ((input?.trim()?.length > 1) ? this.http.get<{ products: Product[] }>(`${this.productsUrl}/search?q=${input.toLowerCase()}`) : of({ products: [] }))
       .pipe(
         // Additional sorting on switchMap output
-        map(regions => regions.sort((region1, region2) => region1.capital.localeCompare(region2.capital))),
-        // Taps the final emitted value from inner observable
-        tap(data => console.log('output:', data))
+        map(({ products }) => products.sort((product1, product2) => product1.title.localeCompare(product2.title))),
+        // Taps the final emitted value from mapping transformation
+        tap(products => console.log('products:', products)),
       )),
   );
 }

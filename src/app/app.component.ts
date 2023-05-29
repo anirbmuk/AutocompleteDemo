@@ -1,8 +1,8 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
-import { AutocompleteService } from './autocomplete.service';
-import { Region } from './region.interface';
+import { ProductService } from './product.service';
+import { Product } from './product.interface';
 
 @Component({
   selector: 'app-root',
@@ -16,15 +16,15 @@ export class AppComponent {
     autocomplete: new FormControl('')
   });
 
-  constructor(private readonly autocompleteService: AutocompleteService) { }
+  constructor(private readonly productService: ProductService) { }
 
-  readonly regions$ = this.autocompleteService.autocomplete$;
+  readonly products$ = this.productService.products$;
 
   onInput(event: Event): void {
-    this.autocompleteService.setAction((event?.target as HTMLInputElement)?.value);
+    this.productService.setAction((event?.target as HTMLInputElement)?.value);
   }
 
-  trackByFn(_: number, region: Region) {
-    return region.id;
+  trackByFn(_: number, product: Product) {
+    return product.id;
   }
 }
